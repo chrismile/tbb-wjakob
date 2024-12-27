@@ -212,7 +212,9 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
    if (SUPPORTS_FLIFETIME)
      target_compile_options(tbb_interface INTERFACE -flifetime-dse=1)
    endif()
-   target_compile_options(tbb_interface INTERFACE -Wno-error=changes-meaning)
+   if (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 13.0)
+      target_compile_options(tbb_interface INTERFACE -Wno-error=changes-meaning)
+   endif()
 endif()
 
 # Linker export definitions
